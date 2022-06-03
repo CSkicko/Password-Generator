@@ -33,30 +33,29 @@ var charSpecial = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '
 var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
 var typeMessage = "Type yes to include or any other value to omit."
 
+//  Capture and validate password length
 function gatherLength(){
-  // Assign initial desired length
   criteria.length = parseInt(prompt(lengthMessage));
-  // Validate and reassign length until valid input received
   while(!criteria.lengthIsValid()){
     criteria.length = prompt("Sorry, your selection is not valid. " + lengthMessage);
   }
 }
 
+// Capture and validate character types
 function gatherType(){
-  // Assign initial desired types
-  criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage);
-  criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage);
-  criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage);
-  criteria.special = prompt("Would you like to include special characters? " + typeMessage);
-  // Validate and reassign types until valid input received
+  criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage).toLowerCase();
+  criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage).toLowerCase();
+  criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage).toLowerCase();
+  criteria.special = prompt("Would you like to include special characters? " + typeMessage).toLowerCase();
   while(!criteria.typeIsValid()){
     alert("You must select at least one type of character.");
-    criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage);
-    criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage);
-    criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage);
-    criteria.special = prompt("Would you like to include special characters? " + typeMessage);
+    criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage).toLowerCase();
+    criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage).toLowerCase();
+    criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage).toLowerCase();
+    criteria.special = prompt("Would you like to include special characters? " + typeMessage).toLowerCase();
   }
 }
+
 
 // Generate password function
 function generatePassword() {
