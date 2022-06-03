@@ -1,13 +1,13 @@
 // Set up password criteria object
 var criteria = {
   length: 0,
-  lower: false,
-  upper: false,
-  numeric: false,
-  special: false,
-  // Determine validity of length
+  lower: 'no',
+  upper: 'no',
+  numeric: 'no',
+  special: 'no',
+  // Determine validity of length. Note !this.length required for string inputs (i.e. NaN values)
   lengthIsValid: function(){
-    if(this.length < 8 || this.length > 128){
+    if(this.length < 8 || this.length > 128 || !this.length){
       return false;
     } else {
       return true;
@@ -15,11 +15,21 @@ var criteria = {
   },
   // Determine validity of type selection
   typeIsValid: function(){
-    if(!this.lower && !this.upper && !this.numeric && !this.special){
+    if(this.lower !== 'yes' && this.upper !== 'yes' && this.numeric !== 'yes' && this.special !== 'yes'){
       return false;
     } else {
       return true;
     }
+  }
+}
+
+// Initialise the message for the password length
+var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
+
+function generatePassword() {
+  criteria.length = parseInt(prompt(lengthMessage));
+  while(!criteria.lengthIsValid()){
+    criteria.length = prompt("Sorry, your selection is not valid. " + lengthMessage);
   }
 }
 
