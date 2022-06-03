@@ -28,6 +28,8 @@ var charLower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
 var charUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var charNumeric = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 var charSpecial = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~'];
+// charAll used to generate an array of all character types to be put into password
+var charAll = [];
 
 // Initialise the message for the password length & types
 var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
@@ -56,11 +58,27 @@ function gatherType(){
   }
 }
 
+// Create master character array based on selections
+function setCharacters() {
+  if (criteria.lower == 'yes'){
+    charAll.push(charLower);
+  }
+  if (criteria.upper == 'yes'){
+    charAll.push(charUpper);
+  }
+  if (criteria.numeric == 'yes'){
+    charAll.push(charNumeric);
+  }
+  if (criteria.special == 'yes'){
+    charAll.push(charSpecial);
+  }
+}
 
 // Generate password function
 function generatePassword() {
   gatherLength();
   gatherType();
+  setCharacters();
   var tempString = '';
   for (let i = 0; i < criteria.length; i++){
     tempString = tempString.concat(charLower[Math.floor(Math.random() * charLower.length)]);
