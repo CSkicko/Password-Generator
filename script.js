@@ -64,7 +64,7 @@ function generatePassword() {
   gatherType();
   var tempString = '';
   for (let i = 0; i < criteria.length; i++){
-    tempString = tempString.concat('a');
+    tempString = tempString.concat(charLower[Math.floor(Math.random() * charLower.length)]);
   }
   return tempString
 }
