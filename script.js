@@ -27,13 +27,16 @@ var criteria = {
 var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
 var typeMessage = "Type yes to include or any other value to omit."
 
-function gatherInput(){
+function gatherLength(){
   // Assign initial desired length
   criteria.length = parseInt(prompt(lengthMessage));
   // Validate and reassign length until valid input received
   while(!criteria.lengthIsValid()){
     criteria.length = prompt("Sorry, your selection is not valid. " + lengthMessage);
   }
+}
+
+function gatherType(){
   // Assign initial desired types
   criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage);
   criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage);
@@ -50,7 +53,8 @@ function gatherInput(){
 }
 
 function generatePassword() {
-  gatherInput();
+  gatherLength();
+  gatherType();
 }
 
 // Assignment Code
