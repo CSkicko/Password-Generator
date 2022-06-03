@@ -80,8 +80,14 @@ function generatePassword() {
   gatherType();
   setCharacters();
   var tempString = '';
+  var j = 0;
   for (let i = 0; i < criteria.length; i++){
-    tempString = tempString.concat(charLower[Math.floor(Math.random() * charLower.length)]);
+    tempString = tempString.concat(charAll[j][Math.floor(Math.random() * charAll[j].length)]);
+    if (j >= (charAll.length - 1)){
+      j = 0;
+    } else{
+      j++;
+    }
   }
   return tempString
 }
