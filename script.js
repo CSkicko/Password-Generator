@@ -1,4 +1,4 @@
-// Set up password criteria object
+// Set up password criteria object (global scope)
 var criteria = {
   length: 0,
   lower: 'no',
@@ -52,9 +52,15 @@ function gatherType(){
   }
 }
 
+// Generate password function
 function generatePassword() {
   gatherLength();
   gatherType();
+  var tempString = '';
+  for (let i = 0; i < criteria.length; i++){
+    tempString = tempString.concat('a');
+  }
+  return tempString
 }
 
 // Assignment Code
