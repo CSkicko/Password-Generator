@@ -27,7 +27,7 @@ var criteria = {
 var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
 var typeMessage = "Type yes to include or any other value to omit."
 
-function generatePassword() {
+function gatherInput(){
   // Assign initial desired length
   criteria.length = parseInt(prompt(lengthMessage));
   // Validate and reassign length until valid input received
@@ -47,6 +47,10 @@ function generatePassword() {
     criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage);
     criteria.special = prompt("Would you like to include special characters? " + typeMessage);
   }
+}
+
+function generatePassword() {
+  gatherInput();
 }
 
 // Assignment Code
