@@ -35,4 +35,5 @@ Use the following link to view the final rendered website:
 https://cskicko.github.io/Password-Generator/
 
 A screenshot of the final product is provided below:
+![Password-Generator](https://user-images.githubusercontent.com/84214056/172031713-d3d4f701-dea8-4cc4-86f3-5bb77f99ee6e.jpg)
 
