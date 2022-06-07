@@ -1,10 +1,10 @@
 // Set up password criteria object (global scope)
 var criteria = {
   length: 0,
-  lower: 'no',
-  upper: 'no',
-  numeric: 'no',
-  special: 'no',
+  lower: false,
+  upper: false,
+  numeric: false,
+  special: false,
   // Determine validity of length. Note !this.length required for string inputs (i.e. NaN values)
   lengthIsValid: function(){
     if(this.length < 8 || this.length > 128 || !this.length){
@@ -15,7 +15,7 @@ var criteria = {
   },
   // Determine validity of type selection
   typeIsValid: function(){
-    if(this.lower !== 'yes' && this.upper !== 'yes' && this.numeric !== 'yes' && this.special !== 'yes'){
+    if(!this.lower && !this.upper && !this.numeric && !this.special){
       return false;
     } else {
       return true;
@@ -33,7 +33,7 @@ var charAll = [];
 
 // Initialise the message for the password length & types
 var lengthMessage = "Please select the desired legnth of the password by typing a value between 8 and 128";
-var typeMessage = "Type yes to include or any other value to omit."
+var typeMessage = "Select ok to include or cancel to omit."
 
 //  Capture and validate password length
 function gatherLength(){
@@ -45,37 +45,38 @@ function gatherLength(){
 
 // Capture and validate character types
 function gatherType(){
-  criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage).toLowerCase();
-  criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage).toLowerCase();
-  criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage).toLowerCase();
-  criteria.special = prompt("Would you like to include special characters? " + typeMessage).toLowerCase();
+  criteria.lower = confirm("Would you like to include lower case characters?\n" + typeMessage);
+  criteria.upper = confirm("Would you like to include upper case characters?\n" + typeMessage);
+  criteria.numeric = confirm("Would you like to include numeric characters?\n" + typeMessage);
+  criteria.special = confirm("Would you like to include special characters?\n" + typeMessage);
   while(!criteria.typeIsValid()){
     alert("You must select at least one type of character.");
-    criteria.lower = prompt("Would you like to include lower case characters? " + typeMessage).toLowerCase();
-    criteria.upper = prompt("Would you like to include upper case characters? " + typeMessage).toLowerCase();
-    criteria.numeric = prompt("Would you like to include numeric characters? " + typeMessage).toLowerCase();
-    criteria.special = prompt("Would you like to include special characters? " + typeMessage).toLowerCase();
+    criteria.lower = confirm("Would you like to include lower case characters?\n" + typeMessage);
+    criteria.upper = confirm("Would you like to include upper case characters?\n" + typeMessage);
+    criteria.numeric = confirm("Would you like to include numeric characters?\n" + typeMessage);
+    criteria.special = confirm("Would you like to include special characters?\n" + typeMessage);
   }
 }
 
 // Create master character array based on selections
 function setCharacters() {
-  if (criteria.lower == 'yes'){
+  if (criteria.lower){
     charAll.push(charLower);
   }
-  if (criteria.upper == 'yes'){
+  if (criteria.upper){
     charAll.push(charUpper);
   }
-  if (criteria.numeric == 'yes'){
+  if (criteria.numeric){
     charAll.push(charNumeric);
   }
-  if (criteria.special == 'yes'){
+  if (criteria.special){
     charAll.push(charSpecial);
   }
 }
 
 // Generate password function
 function generatePassword() {
+  charAll = [];
   gatherLength();
   gatherType();
   setCharacters();
